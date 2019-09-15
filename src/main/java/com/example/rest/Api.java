@@ -32,6 +32,7 @@ public class Api {
     @Consumes(MediaType.APPLICATION_JSON)// specifies the request body content
     @Produces(MediaType.TEXT_PLAIN)
     public Response addPerson(String jsondata) {
+         String res="Error";
         try{ 
             ObjectMapper mapper = new ObjectMapper();
 
@@ -47,11 +48,14 @@ PersonData user = mapper.readValue(jsondata, PersonData.class);
                 pst.executeUpdate();
                 pst.close();
                 conn.close();
+                res="Data saved Successfully";
          }catch(Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
+            res=e.getMessage();
         }
+        
         Response response = Response.status(Response.Status.OK)
-                          
+                          .entity(res)
                             .type(MediaType.APPLICATION_JSON).build();
         return response;
     }
