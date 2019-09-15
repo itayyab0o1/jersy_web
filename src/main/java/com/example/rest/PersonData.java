@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PersonData implements Serializable {
 
     
-   
     private long id;
     private String name;
    
